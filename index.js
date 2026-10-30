@@ -26,6 +26,9 @@ scissorsBtn.addEventListener("click", function () {
 
 const resultsDiv = document.querySelector('#game-info')
 
+const humanScoreSpan = document.querySelector('#human-score')
+const computerScoreSpan = document.querySelector('#computer-score')
+
 function gameLoop(rounds) {
     let humanScore = 0
     let computerScore = 0
@@ -59,7 +62,18 @@ function playRound(humanChoice, computerChoice) {
         logResults(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}`)
         winner = "human"
     }
-    return winner
+    
+    updateScores(winner)
+}
+
+function updateScores(roundResult) {
+    const humanScore = +humanScoreSpan.textContent
+    const computerScore = +computerScoreSpan.textContent
+    if (roundResult === "computer") {
+        computerScoreSpan.textContent = computerScore + 1
+    } else if (roundResult === "human") {
+        humanScoreSpan.textContent = humanScore + 1
+    }
 }
 
 function logResults(message) {
