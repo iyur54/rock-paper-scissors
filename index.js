@@ -4,6 +4,9 @@
 // 3. declare the playes scores
 // 4. play a single round
 
+let humanScore = 0
+let computerScore = 0
+
 function getComputerChoice() {
     // 1, 2 or 3
     const randomNum = Math.floor(Math.random() * 3) + 1
