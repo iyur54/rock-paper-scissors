@@ -29,24 +29,6 @@ const resultsDiv = document.querySelector('#game-info')
 const humanScoreSpan = document.querySelector('#human-score')
 const computerScoreSpan = document.querySelector('#computer-score')
 
-function gameLoop(rounds) {
-    let humanScore = 0
-    let computerScore = 0
-
-    for (let i = 0; i < rounds; i++) {
-        const humanChoice = getHumanChoice()
-        const computerChoice = getComputerChoice()
-        const result = playRound(humanChoice, computerChoice)
-        if (result === "computer") {
-            computerScore++
-        } else if (result === "human") {
-            humanScore++
-        }
-    }
-
-    printSummary(humanScore, computerScore)
-}
-
 function playRound(humanChoice, computerChoice) {
     let winner = ""
 
