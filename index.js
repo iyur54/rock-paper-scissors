@@ -3,24 +3,57 @@
 // 2. get the human choice
 // 3. declare the playes scores
 // 4. play a single round
+// 5. game loop (5 rounds)
 
-let humanScore = 0
-let computerScore = 0
+gameLoop(5)
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        console.log(`Tie! ${capitalize(humanChoice)} and ${capitalize(computerChoice)}`)
-        return
+function gameLoop(rounds) {
+    let humanScore = 0
+    let computerScore = 0
+
+    for (let i = 0; i < rounds; i++) {
+        const humanChoice = getHumanChoice()
+        const computerChoice = getComputerChoice()
+        const result = playRound(humanChoice, computerChoice)
+        if (result === "computer") {
+            computerScore++
+        } else if (result === "human") {
+            humanScore++
+        }
     }
 
-    if (humanChoice === "rock" && computerChoice === "paper"
+    printSummary(humanScore, computerScore)
+}
+
+function playRound(humanChoice, computerChoice) {
+    let winner = ""
+
+    if (humanChoice === computerChoice) {
+        console.log(`Tie! ${capitalize(humanChoice)} and ${capitalize(computerChoice)}`)
+        winner = ""
+    } else if (humanChoice === "rock" && computerChoice === "paper"
         || humanChoice === "paper" && computerChoice === "scissors"
         || humanChoice === "scissors" && computerChoice === "rock") {
         console.log(`You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}`)
-        computerScore++
+        winner = "computer"
     } else { // All other combinations are win
         console.log(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}`)
-        humanScore++
+        winner = "human"
+    }
+    return winner
+}
+
+function printSummary(humanScore, computerScore) {
+    console.log("The final result is:")
+    console.log(`Human: ${humanScore}`)
+    console.log(`Computer: ${computerScore}`)
+    
+    if (humanScore > computerScore) {
+        console.log("Human won")
+    } else if (humanScore < computerScore) {
+        console.log("Computer won")
+    } else {
+        console.log("Tie")
     }
 }
 
