@@ -5,7 +5,12 @@
 // 4. play a single round
 // 5. game loop (5 rounds)
 
-gameLoop(5)
+// UI pseudocode:
+// 1. 3 buttons - 3 event listeners that call playRound
+// 2. div to display results
+// 3. show game scores
+// 4. show results when someone gets 5 points
+
 
 function gameLoop(rounds) {
     let humanScore = 0
