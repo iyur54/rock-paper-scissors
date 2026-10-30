@@ -7,6 +7,27 @@
 let humanScore = 0
 let computerScore = 0
 
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        console.log(`Tie! ${capitalize(humanChoice)} and ${capitalize(computerChoice)}`)
+        return
+    }
+
+    if (humanChoice === "rock" && computerChoice === "paper"
+        || humanChoice === "paper" && computerChoice === "scissors"
+        || humanChoice === "scissors" && computerChoice === "rock") {
+        console.log(`You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}`)
+        computerScore++
+    } else { // All other combinations are win
+        console.log(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}`)
+        humanScore++
+    }
+}
+
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 function getComputerChoice() {
     // 1, 2 or 3
     const randomNum = Math.floor(Math.random() * 3) + 1
