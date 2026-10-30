@@ -17,3 +17,8 @@ function getComputerChoice() {
         return "scissors"
     }
 }
+
+function getHumanChoice() {
+    const choice = prompt("Enter your move (rock, paper or scissors?):")
+    return choice.toLowerCase()
+}
