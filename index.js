@@ -24,6 +24,8 @@ scissorsBtn.addEventListener("click", function () {
     playRound("scissors", getComputerChoice())
 })
 
+const resultsDiv = document.querySelector('#game-info')
+
 function gameLoop(rounds) {
     let humanScore = 0
     let computerScore = 0
@@ -46,18 +48,22 @@ function playRound(humanChoice, computerChoice) {
     let winner = ""
 
     if (humanChoice === computerChoice) {
-        console.log(`Tie! ${capitalize(humanChoice)} and ${capitalize(computerChoice)}`)
+        logResults(`Tie! ${capitalize(humanChoice)} and ${capitalize(computerChoice)}`)
         winner = ""
     } else if (humanChoice === "rock" && computerChoice === "paper"
         || humanChoice === "paper" && computerChoice === "scissors"
         || humanChoice === "scissors" && computerChoice === "rock") {
-        console.log(`You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}`)
+        logResults(`You lose! ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}`)
         winner = "computer"
     } else { // All other combinations are win
-        console.log(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}`)
+        logResults(`You win! ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}`)
         winner = "human"
     }
     return winner
+}
+
+function logResults(message) {
+    resultsDiv.textContent = message
 }
 
 function printSummary(humanScore, computerScore) {
