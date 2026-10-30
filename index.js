@@ -67,30 +67,53 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function updateScores(roundResult) {
-    const humanScore = +humanScoreSpan.textContent
-    const computerScore = +computerScoreSpan.textContent
+    let humanScore = +humanScoreSpan.textContent
+    let computerScore = +computerScoreSpan.textContent
+
     if (roundResult === "computer") {
-        computerScoreSpan.textContent = computerScore + 1
+        computerScore++
+        computerScoreSpan.textContent = computerScore
     } else if (roundResult === "human") {
-        humanScoreSpan.textContent = humanScore + 1
+        humanScore++
+        humanScoreSpan.textContent = humanScore
+    }
+
+    announceWinner(humanScore, computerScore)
+}
+
+function announceWinner(humanScore, computerScore) {
+    if (humanScore === 5 || computerScore === 5) {
+        printSummary(humanScore, computerScore)
     }
 }
 
-function logResults(message) {
-    resultsDiv.textContent = message
+function logResults(message, append = false, html = false) {
+    if (!append) {
+        if (!html) {
+            resultsDiv.textContent = message
+        } else if (html) {
+            resultsDiv.innerHTML = message
+        }
+    } else if (append) {
+        if (!html) {
+            resultsDiv.textContent += message
+        } else if (html) {
+            resultsDiv.innerHTML += message
+        }
+    }
 }
 
 function printSummary(humanScore, computerScore) {
-    console.log("The final result is:")
-    console.log(`Human: ${humanScore}`)
-    console.log(`Computer: ${computerScore}`)
+    logResults("<br>The final result is:", append=true, html=true)
+    logResults(`<br>Human: ${humanScore}`, append=true, html=true)
+    logResults(`<br>Computer: ${computerScore}`, append=true, html=true)
     
     if (humanScore > computerScore) {
-        console.log("Human won")
+        logResults("<br>Human won", append=true, html=true)
     } else if (humanScore < computerScore) {
-        console.log("Computer won")
+        logResults("<br>Computer won", append=true, html=true)
     } else {
-        console.log("Tie")
+        logResults("<br>Tie", append=true, html=true)
     }
 }
 
